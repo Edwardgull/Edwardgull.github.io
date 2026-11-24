@@ -34,7 +34,7 @@
                 "Outside of coding, I like playing video games and listening to music. Feel free to check out my Scratch projects below!"
             ],
 
-            // Add or remove projects here! Just paste the project ID number from the Scratch URL.
+            // Add or remove projects/studios here! Just paste the ID number from the Scratch URL.
             projects: [
                 {
                     id: "1396076583",
@@ -49,9 +49,11 @@
                     buttonText: "Play on Scratch"
                 },
                 {
-                    title: "place holder",
-                    description: "placeholder currently need mor games",
-                    buttonText: "Play on Scratch"
+                    id: "52178524",
+                    type: "text monster",
+                    title: "My Scratch Studio lol",
+                    description: "contains more of my games and people who curate in this studios games!",
+                    buttonText: "View Studio on Scratch"
                 }
             ]
         };
@@ -134,15 +136,21 @@
             aboutContainer.appendChild(p);
         });
 
-        // Build Project Cards
+        // Build Project & Studio Cards
         const projectsGrid = document.getElementById("projects-grid");
         MY_PROFILE.projects.forEach((project, index) => {
             const card = document.createElement("article");
             card.className = "bg-white/90 rounded-xl border border-rose-200 overflow-hidden shadow-sm flex flex-col";
             
-            const thumbUrl = `https://cdn2.scratch.mit.edu/get_image/project/${project.id}_480x360.png`;
-            const fallbackUrl = `https://placehold.co/480x360/f43f5e/ffffff?text=Project+${index + 1}`;
-            const projectUrl = `https://scratch.mit.edu/projects/${project.id}/`;
+            const isStudio = project.type === "studio";
+            const thumbUrl = isStudio
+                ? `https://cdn2.scratch.mit.edu/get_image/gallery/${project.id}_480x360.png`
+                : `https://cdn2.scratch.mit.edu/get_image/project/${project.id}_480x360.png`;
+            const fallbackLabel = isStudio ? `Studio+${index + 1}` : `Project+${index + 1}`;
+            const fallbackUrl = `https://placehold.co/480x360/f43f5e/ffffff?text=${fallbackLabel}`;
+            const projectUrl = isStudio
+                ? `https://scratch.mit.edu/studios/${project.id}/`
+                : `https://scratch.mit.edu/projects/${project.id}/`;
 
             card.innerHTML = `
                 <img src="${thumbUrl}" 
