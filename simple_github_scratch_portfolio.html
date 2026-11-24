@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EDIT THIS: Your page title that shows up in the browser tab -->
+    <title>My Portfolio</title>
+    <!-- Using Tailwind CSS for simple, clean, responsive styling without needing a separate CSS file -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Clean Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- ========================================== -->
+    <!-- EASY SETTINGS: EDIT YOUR INFO HERE!        -->
+    <!-- ========================================== -->
+    <script>
+        const MY_PROFILE = {
+            name: "Rose",
+            tagline: "Coder, Creator & Scratch Developer",
+            scratchUsername: "4Roses", // Just your username, not the full link!
+            githubUsername: "Edwardgull",   // Just your username, not the full link!
+            footerText: "Made by Rose • Hosted on GitHub Pages",
+
+            // Write each paragraph of your About Me section inside quotes
+            aboutMe: [
+                "Hi! Welcome to my website. I'm a creator who enjoys building games, animations, and cool interactive stuff. Right now, I spend most of my time coding on Scratch, learning how programming works, and experimenting with new ideas.",
+                "Outside of coding, I like playing video games and listening to music. Feel free to check out my Scratch projects below!"
+            ],
+
+            // Add or remove projects here! Just paste the project ID number from the Scratch URL.
+            projects: [
+                {
+                    id: "1396076583",
+                    title: "Nanmix",
+                    description: "currently isnt finnished",
+                    buttonText: "Play on Scratch"
+                },
+                {
+                    id: "PROJECT_ID_2",
+                    title: "place holder",
+                    description: "placeholder currently need mor games",
+                    buttonText: "Play on Scratch"
+                },
+                {
+                    title: "place holder",
+                    description: "placeholder currently need mor games",
+                    buttonText: "Play on Scratch"
+                }
+            ]
+        };
+    </script>
+
+    <!-- Main Container: Keeps everything centered and readable on phones and computers -->
+    <div class="max-w-3xl mx-auto px-6 py-12">
+
+        <!-- HEADER SECTION -->
+        <header class="border-b border-slate-200 pb-8 mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h1 id="display-name" class="text-3xl font-bold text-slate-900"></h1>
+                <p id="display-tagline" class="text-slate-600 mt-1"></p>
+            </div>
+
+            <!-- Social / Profile Buttons -->
+            <div class="flex flex-wrap gap-3">
+                <a id="scratch-link" href="#" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition shadow-sm">
+                    My Scratch Profile
+                </a>
+
+                <a id="github-link" href="#" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg transition shadow-sm">
+                    GitHub
+                </a>
+            </div>
+        </header>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">About Me</h2>
+            <div id="about-container" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4 text-slate-700 leading-relaxed">
+                <!-- Paragraphs are automatically added here from MY_PROFILE.aboutMe -->
+            </div>
+        </section>
+
+        <!-- SCRATCH PROJECTS SECTION -->
+        <section id="projects" class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">My Scratch Projects</h2>
+                <a id="all-projects-link" href="#" target="_blank" rel="noopener noreferrer" 
+                   class="text-sm font-semibold text-amber-600 hover:text-amber-700 hover:underline">
+                    See all on Scratch &rarr;
+                </a>
+            </div>
+
+            <!-- Grid of Project Cards (Automatically built from MY_PROFILE.projects) -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </section>
+
+        <!-- FOOTER SECTION -->
+        <footer class="border-t border-slate-200 pt-6 text-center text-sm text-slate-500">
+            <p id="display-footer"></p>
+        </footer>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT THAT FILLS IN THE PAGE              -->
+    <!-- (You don't need to edit anything below!)   -->
+    <!-- ========================================== -->
+    <script>
+        // Fill in Header & Footer text
+        document.title = MY_PROFILE.name + " - Portfolio";
+        document.getElementById("display-name").textContent = MY_PROFILE.name;
+        document.getElementById("display-tagline").textContent = MY_PROFILE.tagline;
+        document.getElementById("display-footer").textContent = MY_PROFILE.footerText;
+
+        // Fill in Profile Links
+        document.getElementById("scratch-link").href = `https://scratch.mit.edu/users/${MY_PROFILE.scratchUsername}/`;
+        document.getElementById("all-projects-link").href = `https://scratch.mit.edu/users/${MY_PROFILE.scratchUsername}/projects/`;
+        document.getElementById("github-link").href = `https://github.com/${MY_PROFILE.githubUsername}`;
+
+        // Build About Me Paragraphs
+        const aboutContainer = document.getElementById("about-container");
+        MY_PROFILE.aboutMe.forEach(paragraphText => {
+            const p = document.createElement("p");
+            p.textContent = paragraphText;
+            aboutContainer.appendChild(p);
+        });
+
+        // Build Project Cards
+        const projectsGrid = document.getElementById("projects-grid");
+        MY_PROFILE.projects.forEach((project, index) => {
+            const card = document.createElement("article");
+            card.className = "bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col";
+            
+            const thumbUrl = `https://cdn2.scratch.mit.edu/get_image/project/${project.id}_480x360.png`;
+            const fallbackUrl = `https://placehold.co/480x360/f59e0b/ffffff?text=Project+${index + 1}`;
+            const projectUrl = `https://scratch.mit.edu/projects/${project.id}/`;
+
+            card.innerHTML = `
+                <img src="${thumbUrl}" 
+                     onerror="this.onerror=null; this.src='${fallbackUrl}';"
+                     alt="${project.title} Thumbnail" 
+                     class="w-full h-44 object-cover border-b border-slate-100">
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">${project.title}</h3>
+                        <p class="text-slate-600 text-sm mt-2">${project.description}</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-100">
+                        <a href="${projectUrl}" target="_blank" rel="noopener noreferrer" 
+                           class="inline-block text-sm font-semibold text-amber-600 hover:text-amber-700">
+                            ${project.buttonText || "Play on Scratch"} &rarr;
+                        </a>
+                    </div>
+                </div>
+            `;
+            projectsGrid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
